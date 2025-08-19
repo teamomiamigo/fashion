@@ -3,7 +3,15 @@ import { SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
 import { useAuthStore } from '../store/useAuthStore';
 
 export default function ProfileScreen() {
-  const { user, logout } = useAuthStore();
+  const { user, signOut } = useAuthStore();
+
+  const handleSignOut = async () => {
+    try {
+      await signOut();
+    } catch (error) {
+      console.error('Sign out error:', error);
+    }
+  };
 
   return (
     <SafeAreaView className="flex-1 bg-white">
@@ -23,11 +31,11 @@ export default function ProfileScreen() {
         </View>
 
         <TouchableOpacity
-          onPress={logout}
+          onPress={handleSignOut}
           className="bg-red-500 p-4 rounded-lg"
         >
           <Text className="text-white text-center font-semibold">
-            Logout
+            Sign Out
           </Text>
         </TouchableOpacity>
       </View>

@@ -1,20 +1,53 @@
 import React from 'react';
-import { SafeAreaView, Text, View } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { useAuthStore } from '../store/useAuthStore';
 
 export default function HomeScreen() {
   const { user } = useAuthStore();
 
   return (
-    <SafeAreaView className="flex-1 bg-white">
-      <View className="flex-1 items-center justify-center p-4">
-        <Text className="text-2xl font-bold text-gray-800 mb-4">
+    <SafeAreaView style={styles.container}>
+      <View style={styles.content}>
+        <Text style={styles.title}>
           Welcome to Fashion App
         </Text>
-        <Text className="text-lg text-gray-600 text-center">
-          {user ? `Hello, ${user.name || user.email}!` : 'Please log in to continue.'}
+        <Text style={styles.subtitle}>
+          {user ? `Hello, ${user.name || user.email}!` : 'Setting up your account...'}
+        </Text>
+        <Text style={styles.description}>
+          Go to the Wardrobe tab to start adding your clothing items!
         </Text>
       </View>
     </SafeAreaView>
   );
-} 
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'white',
+  },
+  content: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 16,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#1f2937',
+    marginBottom: 16,
+  },
+  subtitle: {
+    fontSize: 18,
+    color: '#6b7280',
+    textAlign: 'center',
+    marginBottom: 24,
+  },
+  description: {
+    fontSize: 16,
+    color: '#9ca3af',
+    textAlign: 'center',
+  },
+}); 
